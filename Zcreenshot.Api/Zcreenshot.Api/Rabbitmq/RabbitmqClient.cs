@@ -26,10 +26,10 @@ namespace Zcreenshot.Api.Rabbitmq
             channel.QueueDeclare(queue: queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
             var serializedModel = JsonConvert.SerializeObject(model);
-            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(serializedModel));
+            var body = Encoding.UTF8.GetBytes(serializedModel);
 
             channel.BasicPublish(exchange: "", routingKey: queue, basicProperties: null, body: body);
-            Console.WriteLine(" Message Sent {0}", serializedModel);
+            Console.WriteLine("Message Sent {0}", serializedModel);
         }
     }
 }
