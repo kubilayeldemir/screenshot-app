@@ -32,7 +32,6 @@ namespace Zcreenshot.Api
             services.AddSingleton<IRabbitmqClient, RabbitmqClient>();
             services.AddSingleton<IScreenshotQueueService, ScreenshotQueueService>();
             services.AddSingleton<IScreenshotQueueRepository, ScreenshotQueueRepository>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

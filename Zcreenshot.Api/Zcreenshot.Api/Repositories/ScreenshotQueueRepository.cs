@@ -6,7 +6,7 @@ namespace Zcreenshot.Api.Repositories
     public class ScreenshotQueueRepository : IScreenshotQueueRepository
     {
         private readonly IRabbitmqClient _rabbimqClient;
-        
+
         public ScreenshotQueueRepository(IRabbitmqClient rabbimqClient)
         {
             _rabbimqClient = rabbimqClient;
@@ -14,7 +14,7 @@ namespace Zcreenshot.Api.Repositories
 
         public bool AddScreenshotRequestToQueue(ScreenshotRequest request)
         {
-            _rabbimqClient.Push("take-screenshot",request);
+            _rabbimqClient.Push("take-screenshot", request);
             return true;
         }
     }

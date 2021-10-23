@@ -2,6 +2,6 @@ namespace Zcreenshot.Api.Models
 {
     public class ScreenshotRequest
     {
-        public string websiteURL { get; set; }
+        public string WebsiteURL { get; set; }
     }
 }
