@@ -28,7 +28,10 @@ public class ScreenshotEngineApplication {
 		catch (Exception e){
 			System.out.println(e);
 		}
-		webDriver.quit();
+		finally {
+			webDriver.quit();
+
+		}
 
 	}
 
