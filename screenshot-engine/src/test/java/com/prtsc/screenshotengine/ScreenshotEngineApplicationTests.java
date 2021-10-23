@@ -13,7 +13,7 @@ class ScreenshotEngineApplicationTests {
 	}
 	@Test
 	void driverTest(){
-		System.setProperty("webdriver.chrome.driver", "C:\\Projects\\screenshot-app\\screenshot-engine\\chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver", "C:\\Projects\\screenshot-app\\screenshot-engine\\chromedriver.exe");
 		WebDriver webDriver = new ChromeDriver();
 		webDriver.get("https://www.youtube.com");
 		webDriver.quit();
