@@ -1,34 +1,29 @@
 package com.prtsc.screenshotengine;
 
+import com.prtsc.screenshotengine.Helpers.ImageHelper;
+import com.prtsc.screenshotengine.Helpers.WebDriverHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.yandex.qatools.ashot.AShot;
-
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import ru.yandex.qatools.ashot.Screenshot;
 
 public class ScreenshotEngine {
     static Logger log = LoggerFactory.getLogger(ScreenshotEngine.class);
 
+    @Autowired
     private ScreenshotEngine() {
     }
 
-    public static boolean takeScreenshot(String URL) {
+    public static Screenshot takeScreenshot(String URL) {
         var chromeDriver = WebDriverHelper.getChromeDriver();
 
         chromeDriver.get(URL);
         var screenshot = new AShot()
                 .takeScreenshot(chromeDriver);
-        try {
-            ImageIO.write(screenshot.getImage(), "PNG", new File("./Screenshots/" + new SimpleDateFormat("yyyyMMddHHmmss'.txt'").format(new Date()) + ".png"));
-            chromeDriver.get("data:,");
-            log.info("New Screenshot captured: {}", URL);
-            return true;
-        } catch (Exception e) {
-            log.error("Take Screenshot Error: {} ", e.getMessage());
-            return false;
-        }
+        log.info("New Screenshot captured: {}", URL);
+        chromeDriver.get("data:,");
+
+        return screenshot;
     }
 }

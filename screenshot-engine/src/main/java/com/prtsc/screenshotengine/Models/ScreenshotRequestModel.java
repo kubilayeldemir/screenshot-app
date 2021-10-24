@@ -1,4 +1,4 @@
-package com.prtsc.screenshotengine;
+package com.prtsc.screenshotengine.Models;
 
 public class ScreenshotRequestModel {
     private String WebsiteURL;

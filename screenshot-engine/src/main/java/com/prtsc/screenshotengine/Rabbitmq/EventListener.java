@@ -1,4 +1,4 @@
-package com.prtsc.screenshotengine;
+package com.prtsc.screenshotengine.Rabbitmq;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,13 +12,11 @@ public class EventListener {
     static final String HELLO = "hello";
 
     Logger log = LoggerFactory.getLogger(EventListener.class);
-
-
-    EventReceiver eventReceiver;
+    ScreenshotRequestEvent screenshotRequestEvent;
 
     @Autowired
-    public EventListener(EventReceiver eventReceiver) {
-        this.eventReceiver = eventReceiver;
+    public EventListener(ScreenshotRequestEvent screenshotRequestEvent) {
+        this.screenshotRequestEvent = screenshotRequestEvent;
     }
 
     @RabbitListener(queues = HELLO)
@@ -29,6 +27,6 @@ public class EventListener {
     @RabbitListener(queues = TAKE_SCRENSHOT)
     public void receiveTakeScreenshotMessage(String message) {
         log.info("TakeScreenshotMessage Received: " + message);
-        eventReceiver.receiveMessage(message);
+        screenshotRequestEvent.processScreenshotRequestMessage(message);
     }
 }

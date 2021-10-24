@@ -1,4 +1,4 @@
-package com.prtsc.screenshotengine;
+package com.prtsc.screenshotengine.Helpers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
