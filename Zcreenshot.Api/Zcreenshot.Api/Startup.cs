@@ -37,8 +37,6 @@ namespace Zcreenshot.Api
             services.AddSingleton<IScreenshotQueueRepository, ScreenshotQueueRepository>();
             services.AddMvc()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,13 +48,13 @@ namespace Zcreenshot.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Zcreenshot.Api v1"));
             }
-            
+
             app.UseExceptionHandler(c => c.Run(async context =>
             {
                 var exception = context.Features
                     .Get<IExceptionHandlerPathFeature>()
                     .Error;
-                var response = new { error = exception.Message };
+                var response = new {error = exception.Message};
                 await context.Response.WriteAsJsonAsync(response);
             }));
 
