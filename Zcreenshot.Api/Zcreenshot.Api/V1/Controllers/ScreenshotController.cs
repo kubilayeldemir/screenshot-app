@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Zcreenshot.Api.Models;
 using Zcreenshot.Api.Repositories;
+using Zcreenshot.Api.V1.Models.RequestModels;
 
 namespace Zcreenshot.Api.Controllers
 {
@@ -16,9 +17,9 @@ namespace Zcreenshot.Api.Controllers
         }
 
         [HttpPost("request-screenshot")]
-        public IActionResult Screenshot(ScreenshotRequest model)
+        public IActionResult Screenshot(ScreenshotRequestRequestModel model)
         {
-            _screenshotQueueRepository.AddScreenshotRequestToQueue(model);
+            _screenshotQueueRepository.AddScreenshotRequestToQueue(model.ToModel());
             return Accepted();
         }
     }
