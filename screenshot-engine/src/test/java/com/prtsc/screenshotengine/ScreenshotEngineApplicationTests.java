@@ -8,14 +8,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ScreenshotEngineApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-	@Test
-	void driverTest(){
-//		System.setProperty("webdriver.chrome.driver", "C:\\Projects\\screenshot-app\\screenshot-engine\\chromedriver.exe");
-		WebDriver webDriver = new ChromeDriver();
-		webDriver.get("https://www.youtube.com");
-		webDriver.quit();
-	}
+    @Test
+    void contextLoads() {
+    }
+
+    @Test
+    void driverTest() {
+        WebDriver webDriver = new ChromeDriver();
+        webDriver.get("https://www.youtube.com");
+        webDriver.quit();
+    }
 }
