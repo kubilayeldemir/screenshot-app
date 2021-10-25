@@ -20,7 +20,7 @@ namespace Zcreenshot.Api.Controllers
         public IActionResult Screenshot(ScreenshotRequestRequestModel model)
         {
             _screenshotQueueRepository.AddScreenshotRequestToQueue(model.ToModel());
-            return Accepted();
+            return Accepted(model);
         }
     }
 }
