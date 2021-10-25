@@ -37,6 +37,7 @@ namespace Zcreenshot.Api
             services.AddSingleton<IScreenshotQueueRepository, ScreenshotQueueRepository>();
             services.AddMvc()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+            services.AddHostedService<CreatedScreenshotListener>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
