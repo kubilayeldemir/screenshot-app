@@ -19,10 +19,6 @@ public class EventListener {
         this.screenshotRequestEvent = screenshotRequestEvent;
     }
 
-    @RabbitListener(queues = HELLO)
-    public void receiveHelloMessage(String message) {
-        log.info("HelloMessage Received: " + message);
-    }
 
     @RabbitListener(queues = TAKE_SCRENSHOT)
     public void receiveTakeScreenshotMessage(String message) {

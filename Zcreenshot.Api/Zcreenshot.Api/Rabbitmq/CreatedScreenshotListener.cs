@@ -33,7 +33,7 @@ namespace Zcreenshot.Api.Rabbitmq
             {
                 var body = JsonConvert.DeserializeObject<ScreenshotCreated>(Encoding.UTF8.GetString(ea.Body.ToArray()));
                 //TODO Save screenshot to db
-                Console.WriteLine($" [x] Received {body.imageBase64.Substring(0,body.imageBase64.Length < 15 ? body.imageBase64.Length : 15)}");
+                Console.WriteLine(body);
             };
             channel.BasicConsume("screenshot-created", true, consumer);
         }

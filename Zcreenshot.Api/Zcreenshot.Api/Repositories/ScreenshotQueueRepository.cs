@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Extensions.Logging;
 using Zcreenshot.Api.Models;
 using Zcreenshot.Api.Rabbitmq;
@@ -15,7 +16,7 @@ namespace Zcreenshot.Api.Repositories
             _logger = logger;
         }
 
-        public bool AddScreenshotRequestToQueue(ScreenshotRequest request)
+        public bool PushScreenshotRequestToQueue(ScreenshotRequest request)
         {
             _rabbimqClient.Push("take-screenshot", request);
             _logger.LogInformation($"Screenshot Request Added to the Queue. Model: {request.WebsiteURL}");

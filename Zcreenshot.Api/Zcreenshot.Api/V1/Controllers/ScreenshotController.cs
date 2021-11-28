@@ -1,6 +1,6 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
-using Zcreenshot.Api.Models;
-using Zcreenshot.Api.Repositories;
+using Zcreenshot.Api.Services;
 using Zcreenshot.Api.V1.Models.RequestModels;
 
 namespace Zcreenshot.Api.Controllers
@@ -9,17 +9,18 @@ namespace Zcreenshot.Api.Controllers
     [Route("api/v1/[controller]")]
     public class ScreenshotController : ControllerBase
     {
-        private readonly IScreenshotQueueRepository _screenshotQueueRepository;
+        private readonly IScreenshotService _screenshotService;
 
-        public ScreenshotController(IScreenshotQueueRepository screenshotQueueRepository)
+        public ScreenshotController(IScreenshotService screenshotService)
         {
-            _screenshotQueueRepository = screenshotQueueRepository;
+            _screenshotService = screenshotService;
         }
 
         [HttpPost("request-screenshot")]
         public IActionResult Screenshot(ScreenshotRequestRequestModel model)
         {
-            _screenshotQueueRepository.AddScreenshotRequestToQueue(model.ToModel());
+            var screenshotToTake = model.ToModel();
+            var screenshotId = _screenshotService.SaveAndPushScreenshotRequest(screenshotToTake);
             return Accepted(model);
         }
     }
