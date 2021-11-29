@@ -1,3 +1,4 @@
+using System;
 using Zcreenshot.Api.Models;
 
 namespace Zcreenshot.Api.Services

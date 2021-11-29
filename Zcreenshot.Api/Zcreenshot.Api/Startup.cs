@@ -35,6 +35,8 @@ namespace Zcreenshot.Api
             services.AddSingleton<IRabbitmqClient, RabbitmqClient>();
             services.AddSingleton<IScreenshotQueueService, ScreenshotQueueService>();
             services.AddSingleton<IScreenshotQueueRepository, ScreenshotQueueRepository>();
+            services.AddSingleton<IScreenshotRepository, ScreenshotRepositoryInMemory>();
+            services.AddSingleton<IScreenshotService, ScreenshotService>();
             services.AddMvc()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddHostedService<CreatedScreenshotListener>();

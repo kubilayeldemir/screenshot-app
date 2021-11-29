@@ -1,3 +1,4 @@
+using System;
 using Zcreenshot.Api.Models;
 using Zcreenshot.Api.Repositories;
 
@@ -11,10 +12,9 @@ namespace Zcreenshot.Api.Services
         {
             _queueRepository = queueRepository;
         }
-
         public void PushScreenshotRequest(ScreenshotRequest request)
         {
-            _queueRepository.AddScreenshotRequestToQueue(request);
+            _queueRepository.PushScreenshotRequestToQueue(request);
         }
     }
 }

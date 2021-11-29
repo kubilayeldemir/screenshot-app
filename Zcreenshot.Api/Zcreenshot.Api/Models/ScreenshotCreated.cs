@@ -2,6 +2,7 @@ namespace Zcreenshot.Api.Models
 {
     public class ScreenshotCreated
     {
-        public string imageBase64 { get; set; }
+        public string ScreenshotId { get; set; }
+        public string ImageBase64 { get; set; }
     }
 }
