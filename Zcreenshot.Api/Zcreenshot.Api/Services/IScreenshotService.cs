@@ -10,5 +10,7 @@ namespace Zcreenshot.Api.Services
         public void SaveTakenScreenshot(ScreenshotCreated screenshotCreated);
 
         public Guid SaveAndPushScreenshotRequest(ScreenshotRequest request);
+
+        public Screenshot GetScreenshotById(Guid id);
     }
 }

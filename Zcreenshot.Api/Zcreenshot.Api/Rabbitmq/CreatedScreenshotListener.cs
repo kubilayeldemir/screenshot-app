@@ -7,17 +7,20 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Zcreenshot.Api.Models;
+using Zcreenshot.Api.Services;
 
 namespace Zcreenshot.Api.Rabbitmq
 {
     public class CreatedScreenshotListener : IHostedService
     {
         private readonly IRabbitmqConnection _connection;
+        private readonly IScreenshotService _screenshotService;
         private IModel channel;
 
-        public CreatedScreenshotListener(IRabbitmqConnection connection)
+        public CreatedScreenshotListener(IRabbitmqConnection connection, IScreenshotService screenshotService)
         {
             _connection = connection;
+            _screenshotService = screenshotService;
             CreateChannel();
         }
 
@@ -25,15 +28,17 @@ namespace Zcreenshot.Api.Rabbitmq
         {
             channel = _connection.GetRabbitMqConnection().CreateModel();
         }
-        
+
         public void Register()
         {
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, ea) =>
             {
-                var body = JsonConvert.DeserializeObject<ScreenshotCreated>(Encoding.UTF8.GetString(ea.Body.ToArray()));
-                //TODO Save screenshot to db
-                Console.WriteLine(body);
+                string bodyAsString = Encoding.UTF8.GetString(ea.Body.ToArray());
+                var screenshotCreated =
+                    JsonConvert.DeserializeObject<ScreenshotCreated>(Encoding.UTF8.GetString(ea.Body.ToArray()));
+                _screenshotService.SaveTakenScreenshot(screenshotCreated);
+                Console.WriteLine($"Received Taken Screenshot {screenshotCreated.ScreenshotId}");
             };
             channel.BasicConsume("screenshot-created", true, consumer);
         }
@@ -53,7 +58,6 @@ namespace Zcreenshot.Api.Rabbitmq
         {
             Deregister();
             return Task.CompletedTask;
-
         }
     }
 }

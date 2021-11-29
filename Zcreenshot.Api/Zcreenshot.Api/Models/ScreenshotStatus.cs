@@ -1,8 +1,8 @@
 namespace Zcreenshot.Api.Models
 {
-    public enum ScreenshotStatus
+    public static class ScreenshotStatus
     {
-        WaitingForScreenshotRequest,
-        ScreenshotTaken
+        public const string WaitingForScreenshot = "WaitingForScreenshot";
+        public const string ScreenshotTaken = "ScreenshotTaken";
     }
 }

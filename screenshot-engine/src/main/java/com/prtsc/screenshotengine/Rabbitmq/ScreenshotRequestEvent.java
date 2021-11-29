@@ -22,6 +22,7 @@ public class ScreenshotRequestEvent {
 
         var sc = new ScreenshotCreated();
         sc.setImageBase64(stringImage);
+        sc.setScreenshotId(request.getScreenshotId());
 
         EventPublisher.publishScreenshotToQueue(sc);
     }
